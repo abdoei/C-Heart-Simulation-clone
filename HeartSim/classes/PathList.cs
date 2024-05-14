@@ -1,6 +1,7 @@
 ﻿//#define Data EpAvnrtDataGen
 
 using HeartSim.classes.DataAndTypes;
+using HeartSim.classes.NodeNS;
 using System;
 using System.Collections.Generic;
 
@@ -11,7 +12,7 @@ namespace HeartSim.classes.PathNS
   {
     private PathParameters _pathParameters;
 
-    public Path(string pathName, List<int> pathIntegerParameters, List<float> pathFloatParameters)
+    public Path(string pathName, List<int> pathIntegerParameters, List<double> pathdoubleParameters)
     {
       _pathParameters = new PathParameters
       {
@@ -20,14 +21,14 @@ namespace HeartSim.classes.PathNS
         EntryNodeIndex = pathIntegerParameters[1] - 1,
         ExitNodeIndex = pathIntegerParameters[2] - 1,
         AmplitudeFactor = pathIntegerParameters[3],
-        ForwardSpeed = pathFloatParameters[0],
-        BackwardSpeed = pathFloatParameters[1],
-        ForwardTimerCurrent = pathFloatParameters[2],
-        ForwardTimerDefault = pathFloatParameters[3],
-        BackwardTimerCurrent = pathFloatParameters[4],
-        BackwardTimerDefault = pathFloatParameters[5],
-        PathLength = pathFloatParameters[6],
-        PathSlope = pathFloatParameters[7]
+        ForwardSpeed = pathdoubleParameters[0],
+        BackwardSpeed = pathdoubleParameters[1],
+        ForwardTimerCurrent = pathdoubleParameters[2],
+        ForwardTimerDefault = pathdoubleParameters[3],
+        BackwardTimerCurrent = pathdoubleParameters[4],
+        BackwardTimerDefault = pathdoubleParameters[5],
+        PathLength = pathdoubleParameters[6],
+        PathSlope = pathdoubleParameters[7]
       };
     }
 
@@ -39,19 +40,20 @@ namespace HeartSim.classes.PathNS
       int entryNodeIndex = _pathParameters.EntryNodeIndex;
       int exitNodeIndex = _pathParameters.ExitNodeIndex;
 
-      Node entryNode = nt.NodeTable[entryNodeIndex];
-      Node exitNode = nt.NodeTable[exitNodeIndex];
+      Node entryNode = nt.node_table[entryNodeIndex];
+      //entryNode = nt.
+      Node exitNode = nt.node_table[exitNodeIndex];
 
       switch (_pathParameters.PathStateIndex)
       {
         case PathStateIndexEnum.Idle:
-          if (entryNode.Parameters.Activation)
+          if (entryNode.GetParameters().Activation)
             _pathParameters.PathStateIndex = PathStateIndexEnum.AntegradeConduction;
-          else if (exitNode.Parameters.Activation)
+          else if (exitNode.GetParameters().Activation)
             _pathParameters.PathStateIndex = PathStateIndexEnum.Retrograde;
           break;
         case PathStateIndexEnum.AntegradeConduction:
-          if (exitNode.Parameters.Activation)
+          if (exitNode.GetParameters().Activation)
             _pathParameters.PathStateIndex = PathStateIndexEnum.Double;
           else
           {
@@ -68,7 +70,7 @@ namespace HeartSim.classes.PathNS
           }
           break;
         case PathStateIndexEnum.Retrograde:
-          if (entryNode.Parameters.Activation)
+          if (entryNode.GetParameters().Activation)
             _pathParameters.PathStateIndex = PathStateIndexEnum.Double;
           else
           {
@@ -129,14 +131,14 @@ namespace HeartSim.classes.PathNS
     public void SetEntryNodeIndex(int entryNodeIndex) { _pathParameters.EntryNodeIndex = entryNodeIndex; }
     public void SetExitNodeIndex(int exitNodeIndex) { _pathParameters.ExitNodeIndex = exitNodeIndex; }
     public void SetAmplitudeFactor(int amplitudeFactor) { _pathParameters.AmplitudeFactor = amplitudeFactor; }
-    public void SetForwardSpeed(float forwardSpeed) { _pathParameters.ForwardSpeed = forwardSpeed; }
-    public void SetBackwardSpeed(float backwardSpeed) { _pathParameters.BackwardSpeed = backwardSpeed; }
-    public void SetForwardTimerCurrent(float forwardTimerCurrent) { _pathParameters.ForwardTimerCurrent = forwardTimerCurrent; }
-    public void SetForwardTimerDefault(float forwardTimerDefault) { _pathParameters.ForwardTimerDefault = forwardTimerDefault; }
-    public void SetBackwardTimerCurrent(float backwardTimerCurrent) { _pathParameters.BackwardTimerCurrent = backwardTimerCurrent; }
-    public void SetBackwardTimerDefault(float backwardTimerDefault) { _pathParameters.BackwardTimerDefault = backwardTimerDefault; }
-    public void SetPathLength(float pathLength) { _pathParameters.PathLength = pathLength; }
-    public void SetPathSlope(float pathSlope) { _pathParameters.PathSlope = pathSlope; }
+    public void SetForwardSpeed(double forwardSpeed) { _pathParameters.ForwardSpeed = forwardSpeed; }
+    public void SetBackwardSpeed(double backwardSpeed) { _pathParameters.BackwardSpeed = backwardSpeed; }
+    public void SetForwardTimerCurrent(double forwardTimerCurrent) { _pathParameters.ForwardTimerCurrent = forwardTimerCurrent; }
+    public void SetForwardTimerDefault(double forwardTimerDefault) { _pathParameters.ForwardTimerDefault = forwardTimerDefault; }
+    public void SetBackwardTimerCurrent(double backwardTimerCurrent) { _pathParameters.BackwardTimerCurrent = backwardTimerCurrent; }
+    public void SetBackwardTimerDefault(double backwardTimerDefault) { _pathParameters.BackwardTimerDefault = backwardTimerDefault; }
+    public void SetPathLength(double pathLength) { _pathParameters.PathLength = pathLength; }
+    public void SetPathSlope(double pathSlope) { _pathParameters.PathSlope = pathSlope; }
   }
 
 
@@ -145,14 +147,14 @@ namespace HeartSim.classes.PathNS
     public List<List<PathTerminalPair>> PathTerminalPairsPerPointList;
     public List<Path> path_table;
 
-    public PathTable(List<string> pathNames, List<List<int>> pathIntegerParameters, List<List<float>> pathFloatParameters)
+    public PathTable(List<string> pathNames, List<List<int>> pathIntegerParameters, List<List<double>> pathdoubleParameters)
     {
       PathTerminalPairsPerPointList = new List<List<PathTerminalPair>>();
       path_table = new List<Path>();
 
       for (int i = 0; i < pathNames.Count; i++)
       {
-        path_table.Add(new Path(pathNames[i], pathIntegerParameters[i], pathFloatParameters[i]));
+        path_table.Add(new Path(pathNames[i], pathIntegerParameters[i], pathdoubleParameters[i]));
       }
 
       Dictionary<int, List<PathTerminalPair>> nodeIdxPathsTerminalsMap = new Dictionary<int, List<PathTerminalPair>>();
@@ -175,5 +177,6 @@ namespace HeartSim.classes.PathNS
         PathTerminalPairsPerPointList.Add(nodeIdxPathsTerminalsMap.ContainsKey(nodeIdx) ? nodeIdxPathsTerminalsMap[nodeIdx] : new List<PathTerminalPair>());
       }
     }
+
   }
 }

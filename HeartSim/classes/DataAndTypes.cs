@@ -69,7 +69,7 @@ namespace HeartSim.classes.DataAndTypes
   }
 
   // EpAvnrtDataGen
-  public class Data
+  public static class Data
   {
     // Nodes Data
     public static readonly List<string> NodeNames = new List<string>
@@ -81,7 +81,7 @@ namespace HeartSim.classes.DataAndTypes
         "CS_LA", "slow_b", "slow_a", "fast", "fast_b",
     };
 
-    public readonly List<List<int>> NodeIntParameters = new List<List<int>>
+    public static readonly List<List<int>> NodeIntParameters = new List<List<int>>
   {
     new List<int> {1, 220, 220, 10, 20, 700, 700, 0, 150, 300, 0, 2},
     new List<int> {1, 220, 220, 120, 120, 9999, 9999, 0, 150, 360, 0, 2},
@@ -118,7 +118,7 @@ namespace HeartSim.classes.DataAndTypes
     new List<int> {1, 320, 320, 10, 10, 9999, 9999, 0, 500, 380, 0, 1},
   };
 
-    public readonly List<Position> NodePositions = new List<Position>
+    public static readonly List<Position> NodePositions = new List<Position>
   {
     new Position {X=135.5, Y=295.5}, new Position {X=134.5, Y=161.5}, new Position{X=170.5, Y=216.5}, new Position{X=165.5, Y=263.5},
     new Position {X=204.5, Y=248.5}, new Position {X=236.5, Y=250.5}, new Position{X=262.5, Y=220.5}, new Position{X=245.5, Y=344.5},
@@ -132,7 +132,7 @@ namespace HeartSim.classes.DataAndTypes
   };
 
     // Path Data
-    public readonly List<string> PathNames = new List<string>
+    public static readonly List<string> PathNames = new List<string>
   {
     "SA_CT_a",   "CT",       "slow_AV", "SA_OS",    "fast_AV", "SA_Bach",
       "Bach_LA_a", "LA",       "AV_His",  "His_p",    "His_d",   "His_RBB",
@@ -142,7 +142,7 @@ namespace HeartSim.classes.DataAndTypes
       "slow",      "OS_slow",  "OS_fast", "fast"
   };
 
-    public readonly List<List<int>> PathIntParameters = new List<List<int>>
+    public static readonly List<List<int>> PathIntParameters = new List<List<int>>
   {
     new List<int>{1, 1, 21, 10},  new List<int>{1, 21, 2, 10},  new List<int>{1, 30, 3, 5},   new List<int>{1, 1, 4, 5},
     new List<int>{1, 33, 3, 5},   new List<int>{1, 1, 8, 5},    new List<int>{1, 8, 9, 10},   new List<int>{1, 9, 10, 10},
@@ -155,7 +155,7 @@ namespace HeartSim.classes.DataAndTypes
     new List<int>{1, 4, 32, 10},  new List<int>{1, 32, 33, 10},
   };
 
-    public readonly List<List<double>> PathdoubleParameters = new List<List<double>>
+    public static readonly List<List<double>> PathDoubleParameters = new List<List<double>>
   {
     new List<double>{1, 1, 57, 57, 57, 57, 56.859475903318, 2.260869565217391},
     new List<double>{1, 1, 85, 85, 85, 85, 84.8999411071645, -3.727272727272727},
@@ -194,39 +194,39 @@ namespace HeartSim.classes.DataAndTypes
   };
 
     // EGM Data
-    public readonly List<string> EgmSingleNames = new List<string>
+    public static readonly List<string> EgmSingleNames = new List<string>
   {
     "HRA1",  "HRA2", "HRA3", "HRA4",  "CS1",    "CS2",
       "CS3",   "CS4",  "CS5",  "His_d", "His_m1", "His_m2",
       "His_p", "RVA1", "RVA2", "RVA3",  "RVA4",
   };
 
-    public readonly List<int> EgmSingleIntParameters = new List<int>
+    public static readonly List<int> EgmSingleIntParameters = new List<int>
   {
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
   };
 
-    public readonly List<string> EgmDoubleNames = new List<string>
+    public static readonly List<string> EgmDoubleNames = new List<string>
   {
     "HRA_d", "HRA_m", "HRA_p", "CS1,2", "CS2,3", "CS3,4", "CS4,5",
       "His_d", "His_m", "His_p", "RVA_d", "RVA_m", "RVA_p",
   };
 
-    public readonly List<Tuple<int, int>> EgmDoubleIntParameters = new List<Tuple<int, int>>
+    public static readonly List<Tuple<int, int>> EgmDoubleIntParameters = new List<Tuple<int, int>>
     {
       Tuple.Create(1, 2),   Tuple.Create(2, 3),  Tuple.Create(3, 4),   Tuple.Create(5, 6),   Tuple.Create(6, 7),   Tuple.Create(7, 8),   Tuple.Create(8, 9),
       Tuple.Create(10, 11), Tuple.Create(11, 12), Tuple.Create(12, 13), Tuple.Create(14, 15), Tuple.Create(15, 16), Tuple.Create(16, 17),
     };
 
     // Probe Data
-    public readonly List<string> ProbeNames = new List<string>
+    public static readonly List<string> ProbeNames = new List<string>
   {
     "HRA1",  "HRA2", "HRA3", "HRA4",  "CS1",    "CS2",
       "CS3",   "CS4",  "CS5",  "His_d", "His_m1", "His_m2",
       "His_p", "RVA1", "RVA2", "RVA3",  "RVA4",
   };
 
-    public readonly List<List<int>> ProbeIntParameters = new List<List<int>>
+    public static readonly List<List<int>> ProbeIntParameters = new List<List<int>>
     {
     new List<int>{23, 24}, new List<int>{1, 23, 24}, new List<int>{1, 23}, new List<int>{1 },
     new List<int>{29, 30}, new List<int>{29, 30}, new List<int>{29, 30}, new List<int>{29, 30},
@@ -235,7 +235,7 @@ namespace HeartSim.classes.DataAndTypes
     new List<int>{14, 26},
     };
 
-    public readonly List<Position> ProbePositions = new List<Position>
+    public static readonly List<Position> ProbePositions = new List<Position>
  {
   new Position{X = 168.5, Y = 280.5}, new Position{X = 152.5, Y = 284.5}, new Position{X = 136.5, Y = 282.5}, new Position{X = 131.5, Y = 266.5},
   new Position{X = 305.5, Y = 322.5}, new Position{X = 289.5, Y = 313.5}, new Position{X = 272.5, Y = 305.5}, new Position{X = 254.5, Y = 296.5},
@@ -246,7 +246,7 @@ namespace HeartSim.classes.DataAndTypes
 
 
     // Pace Data
-    public readonly List<string> ComponentNames = new List<string>
+    public static readonly List<string> ComponentNames = new List<string>
   {
     "LRI",
       "AVI",
@@ -254,7 +254,7 @@ namespace HeartSim.classes.DataAndTypes
       "VRP",
   };
 
-    public readonly List<List<int>> PaceIntParameters = new List<List<int>>
+    public static readonly List<List<int>> PaceIntParameters = new List<List<int>>
   {
       new List<int>{1, 1000, 1000, 0},
       new List<int>{1, 150, 150, 0},
