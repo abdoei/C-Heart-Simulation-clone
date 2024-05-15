@@ -37,17 +37,15 @@
       // textBox1
       // 
       this.textBox1.Location = new System.Drawing.Point(12, 12);
-      this.textBox1.Multiline = true;
       this.textBox1.Name = "textBox1";
-      this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-      this.textBox1.Size = new System.Drawing.Size(776, 426);
+      this.textBox1.Size = new System.Drawing.Size(646, 24);
       this.textBox1.TabIndex = 0;
       this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
       // 
       // pictureBox1
       // 
       this.pictureBox1.Image = global::HeartSim.Properties.Resources.EP;
-      this.pictureBox1.Location = new System.Drawing.Point(794, 12);
+      this.pictureBox1.Location = new System.Drawing.Point(12, 12);
       this.pictureBox1.Name = "pictureBox1";
       this.pictureBox1.Size = new System.Drawing.Size(646, 662);
       this.pictureBox1.TabIndex = 1;
@@ -55,7 +53,7 @@
       // 
       // button1
       // 
-      this.button1.Location = new System.Drawing.Point(397, 480);
+      this.button1.Location = new System.Drawing.Point(27, 72);
       this.button1.Name = "button1";
       this.button1.Size = new System.Drawing.Size(75, 23);
       this.button1.TabIndex = 2;
@@ -67,12 +65,13 @@
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(1452, 686);
+      this.ClientSize = new System.Drawing.Size(672, 686);
+      this.Controls.Add(this.textBox1);
       this.Controls.Add(this.button1);
       this.Controls.Add(this.pictureBox1);
-      this.Controls.Add(this.textBox1);
       this.Name = "Form1";
       this.Text = "Form1";
+      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
