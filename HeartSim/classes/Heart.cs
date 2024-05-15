@@ -31,14 +31,11 @@ namespace HeartSim.classes.HeartNS
 
     public void HeartAutomaton()
     {
-      const int ERP = 0; // Example value, replace with actual enum value
-      const int Idle = 0; // Example value, replace with actual enum value
-
-      NodeTable tempNode = m_nodeTable;
-      PathTable tempPath = m_pathTable;
-      PathTable pathTable = m_pathTable;
-      NodeTable nodeTable = m_nodeTable;
-      PathTable tempPathNode = m_pathTable;
+      NodeTable tempNode = new NodeTable(m_nodeTable);
+      PathTable tempPath = new PathTable(m_pathTable);
+      PathTable pathTable = new PathTable(m_pathTable);
+      NodeTable nodeTable = new NodeTable(m_nodeTable);
+      PathTable tempPathNode = new PathTable(m_pathTable);
       List<bool> tempAct = new List<bool>();
 
       for (int i = 0; i < m_nodeTable.node_table.Count; i++)
@@ -54,9 +51,9 @@ namespace HeartSim.classes.HeartNS
         (bool, bool) nodeActs = tempPath.path_table[i].PathAutomaton(nodeTable);
         bool nodeAct1 = nodeActs.Item1;
         bool nodeAct2 = nodeActs.Item2;
-        PathNS.Path path = pathTable.path_table[i];
+        Path path = pathTable.path_table[i];
         int entryIndex = path.GetParameters().EntryNodeIndex;
-        if (nodeTable.node_table[entryIndex].GetParameters().NodeStateIndex != ERP)
+        if (nodeTable.node_table[entryIndex].GetParameters().NodeStateIndex != NodeStateIndex.ERP)
         {
           tempAct[entryIndex] = tempAct[entryIndex] || nodeAct1;
           if (nodeAct1)
@@ -70,7 +67,7 @@ namespace HeartSim.classes.HeartNS
           nodeTable.node_table[entryIndex].SetTERPCurrent(nodeTable.node_table[entryIndex].GetParameters().TERPDefault);
         }
         int exitIndex = path.GetParameters().ExitNodeIndex;
-        if (nodeTable.node_table[exitIndex].GetParameters().NodeStateIndex != ERP)
+        if (nodeTable.node_table[exitIndex].GetParameters().NodeStateIndex != NodeStateIndex.ERP)
         {
           tempAct[exitIndex] = tempAct[exitIndex] || nodeAct2;
           if (nodeAct2)
@@ -96,7 +93,7 @@ namespace HeartSim.classes.HeartNS
         if (tempPathNode.path_table[i].GetParameters().ForwardTimerDefault != tempPath.path_table[i].GetParameters().ForwardTimerDefault)
         {
           tempPath.path_table[i].SetForwardTimerCurrent(tempPathNode.path_table[i].GetParameters().ForwardTimerDefault);
-          if (tempPathNode.path_table[i].GetParameters().PathStateIndex == Idle)
+          if (tempPathNode.path_table[i].GetParameters().PathStateIndex == PathStateIndex.Idle)
           {
             tempPath.path_table[i].SetForwardTimerCurrent(tempPath.path_table[i].GetParameters().ForwardTimerDefault);
           }
@@ -104,7 +101,7 @@ namespace HeartSim.classes.HeartNS
         if (tempPath.path_table[i].GetParameters().BackwardTimerDefault != m_pathTable.path_table[i].GetParameters().BackwardTimerDefault)
         {
           m_pathTable.path_table[i].SetForwardTimerCurrent(tempPath.path_table[i].GetParameters().BackwardTimerDefault);
-          if (tempPath.path_table[i].GetParameters().PathStateIndex == Idle)
+          if (tempPath.path_table[i].GetParameters().PathStateIndex == PathStateIndex.Idle)
           {
             m_pathTable.path_table[i].SetForwardTimerCurrent(m_pathTable.path_table[i].GetParameters().BackwardTimerDefault);
           }

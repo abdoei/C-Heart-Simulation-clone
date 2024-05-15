@@ -29,6 +29,27 @@ namespace HeartSim.classes.PathNS
       };
     }
 
+    // Copy constructor for deep copy
+    public Path(Path path)
+    {
+      _pathParameters = new PathParameters
+      {
+        PathName = path._pathParameters.PathName,
+        PathStateIndex = path._pathParameters.PathStateIndex,
+        EntryNodeIndex = path._pathParameters.EntryNodeIndex,
+        ExitNodeIndex = path._pathParameters.ExitNodeIndex,
+        AmplitudeFactor = path._pathParameters.AmplitudeFactor,
+        ForwardSpeed = path._pathParameters.ForwardSpeed,
+        BackwardSpeed = path._pathParameters.BackwardSpeed,
+        ForwardTimerCurrent = path._pathParameters.ForwardTimerCurrent,
+        ForwardTimerDefault = path._pathParameters.ForwardTimerDefault,
+        BackwardTimerCurrent = path._pathParameters.BackwardTimerCurrent,
+        BackwardTimerDefault = path._pathParameters.BackwardTimerDefault,
+        PathLength = path._pathParameters.PathLength,
+        PathSlope = path._pathParameters.PathSlope
+      };
+    }
+
     public (bool, bool) PathAutomaton(NodeTable nt)
     {
       bool tempNode1Activation = false;
@@ -171,6 +192,23 @@ namespace HeartSim.classes.PathNS
       for (int nodeIdx = 0; nodeIdx < nodeCount; nodeIdx++)
       {
         PathTerminalPairsPerPointList.Add(nodeIdxPathsTerminalsMap.ContainsKey(nodeIdx) ? nodeIdxPathsTerminalsMap[nodeIdx] : new List<PathTerminalPair>());
+      }
+    }
+
+    // copy constructor for deep copy
+    public PathTable(PathTable pathTable)
+    {
+      PathTerminalPairsPerPointList = new List<List<PathTerminalPair>>();
+      path_table = new List<Path>();
+
+      foreach (Path path in pathTable.path_table)
+      {
+        path_table.Add(new Path(path));
+      }
+
+      foreach (List<PathTerminalPair> pathTerminalPairs in pathTable.PathTerminalPairsPerPointList)
+      {
+        PathTerminalPairsPerPointList.Add(new List<PathTerminalPair>(pathTerminalPairs));
       }
     }
 

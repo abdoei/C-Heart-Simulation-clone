@@ -33,6 +33,29 @@ namespace HeartSim.classes.NodeNS
       };
     }
 
+    // Copy constructor for deep copy
+    public Node(Node node)
+    {
+      _nodeParameters = new NodeParameters
+      {
+        NodeName = node._nodeParameters.NodeName,
+        NodeStateIndex = node._nodeParameters.NodeStateIndex,
+        TERPCurrent = node._nodeParameters.TERPCurrent,
+        TERPDefault = node._nodeParameters.TERPDefault,
+        TRRPCurrent = node._nodeParameters.TRRPCurrent,
+        TRRPDefault = node._nodeParameters.TRRPDefault,
+        TrestCurrent = node._nodeParameters.TrestCurrent,
+        TrestDefault = node._nodeParameters.TrestDefault,
+        Activation = node._nodeParameters.Activation,
+        TerpMin = node._nodeParameters.TerpMin,
+        TerpMax = node._nodeParameters.TerpMax,
+        IndexOfPathActivateTheNode = node._nodeParameters.IndexOfPathActivateTheNode,
+        AVness = node._nodeParameters.AVness,
+        ConnectedPaths = node._nodeParameters.ConnectedPaths,
+        NodePos = node._nodeParameters.NodePos,
+      };
+    }
+
     public void NodeAutomaton(PathTable PT)
     {
       Random rand = new Random();
@@ -296,6 +319,16 @@ namespace HeartSim.classes.NodeNS
       {
         List<PathTerminalPair> pathTerminalPairs = pathTable.PathTerminalPairsPerPointList[i];
         node_table.Add(new Node(nodeNames[i], nodeIntParameters[i], pathTerminalPairs, nodePositions[i]));
+      }
+    }
+
+    // copy constructor for deep copy
+    public NodeTable(NodeTable nodeTable)
+    {
+      node_table = new List<Node>(nodeTable.node_table.Count);
+      foreach (Node node in nodeTable.node_table)
+      {
+        node_table.Add(new Node(node));
       }
     }
   }
