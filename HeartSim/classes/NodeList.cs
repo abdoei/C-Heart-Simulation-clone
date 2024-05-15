@@ -56,7 +56,7 @@ namespace HeartSim.classes.NodeNS
       };
     }
 
-    public void NodeAutomaton(PathTable PT)
+    public void NodeAutomaton(ref PathTable PT)
     {
       Random rand = new Random();
 
@@ -73,7 +73,7 @@ namespace HeartSim.classes.NodeNS
                                     // set ERP to longest
             _nodeParameters.TERPDefault = t_Terp_max;
 
-            _nodeParameters.TERPCurrent = _nodeParameters.TERPDefault + (int)Math.Round((rand.NextDouble() - 0.5) * 0 * _nodeParameters.TERPDefault);
+            _nodeParameters.TERPCurrent = _nodeParameters.TERPDefault + (int)Math.Round((1 + (rand.NextDouble() - 0.5) * 0) * _nodeParameters.TERPDefault);
 
             // reset path conduction speed
             // for the paths connected to the node
@@ -91,14 +91,14 @@ namespace HeartSim.classes.NodeNS
               if (path.Terminal == PathTerminal.Entry)
               {
                 double tmp_forward_timer_default =
-                    Math.Round((rand.NextDouble() - 0.5) * 0 *
+                    Math.Round((1 + (rand.NextDouble() - 0.5) * 0) *
                                original_path_length / original_forward_speed);
                 PT.path_table[path_idx].SetForwardTimerDefault(tmp_forward_timer_default);
               }
               else
               {
                 double tmp_backward_timer_default =
-                    Math.Round((rand.NextDouble() - 0.5) * 0 *
+                    Math.Round((1 + (rand.NextDouble() - 0.5) * 0) *
                                original_path_length / original_backward_speed);
                 PT.path_table[path_idx].SetBackwardTimerDefault(tmp_backward_timer_default);
               }
@@ -106,7 +106,7 @@ namespace HeartSim.classes.NodeNS
 
             // Reset Trest
             _nodeParameters.TrestCurrent = (int)Math.Round(
-                _nodeParameters.TrestDefault * (rand.NextDouble() - 0.5) * 0);
+                _nodeParameters.TrestDefault * (1 + (rand.NextDouble() - 0.5) * 0));
             // change state to ERP
             _nodeParameters.NodeStateIndex = NodeStateIndex.ERP;
 
@@ -130,14 +130,14 @@ namespace HeartSim.classes.NodeNS
               if (path.Terminal == PathTerminal.Entry)
               {
                 double tmp_forward_timer_default =
-                    Math.Round((rand.NextDouble() - 0.5) * 0 *
+                    Math.Round((1 + (rand.NextDouble() - 0.5) * 0) *
                                original_path_length / original_forward_speed * ((int)_nodeParameters.AVness + 1));
                 PT.path_table[path_idx].SetForwardTimerDefault(tmp_forward_timer_default);
               }
               else
               {
                 double tmp_backward_timer_default =
-                    Math.Round((rand.NextDouble() - 0.5) * 0 *
+                    Math.Round((1 + (rand.NextDouble() - 0.5) * 0) *
                                original_path_length / original_backward_speed * 3);
                 PT.path_table[path_idx].SetBackwardTimerDefault(tmp_backward_timer_default);
               }
@@ -145,7 +145,7 @@ namespace HeartSim.classes.NodeNS
 
             // reset TERP
             _nodeParameters.TERPCurrent = (int)Math.Round(
-                (rand.NextDouble() - 0.5) * 0 * _nodeParameters.TERPDefault);
+                (1 + (rand.NextDouble() - 0.5) * 0) * _nodeParameters.TERPDefault);
             break;
           case NodeStateIndex.RRP: // RRP
                                    // calculate the ratio of early activation
@@ -156,20 +156,20 @@ namespace HeartSim.classes.NodeNS
             {
               _nodeParameters.TERPDefault =
                   t_Terp_max +
-                  (int)Math.Round((rand.NextDouble() - 0.5) * 0 *
+                  (int)Math.Round((1 + (rand.NextDouble() - 0.5) * 0) *
                              (1 - (1 - ratio) * (1 - ratio) * (1 - ratio)) *
                              (t_Terp_min - t_Terp_max));
             }
             else
             {
               _nodeParameters.TERPDefault =
-                  t_Terp_min + (int)Math.Round((rand.NextDouble() - 0.5) * 0 *
+                  t_Terp_min + (int)Math.Round((1 + (rand.NextDouble() - 0.5) * 0) *
                                           (1 - (ratio * ratio * ratio)) *
                                           (t_Terp_max - t_Terp_min));
             }
 
             _nodeParameters.TERPCurrent = (int)Math.Round(
-                (rand.NextDouble() - 0.5) * 0 * _nodeParameters.TERPDefault);
+                (1 + (rand.NextDouble() - 0.5) * 0) * _nodeParameters.TERPDefault);
 
             // change the conduction speed of connecting path
             foreach (var path in _nodeParameters.ConnectedPaths)
@@ -186,14 +186,14 @@ namespace HeartSim.classes.NodeNS
                 if (path.Terminal == PathTerminal.Entry)
                 {
                   double tmp_forward_timer_default =
-                      Math.Round((rand.NextDouble() - 0.5) * 0 *
+                      Math.Round((1 + (rand.NextDouble() - 0.5) * 0) *
                                  original_path_length / original_forward_speed * (1 + ratio * 3));
                   PT.path_table[path_idx].SetForwardTimerDefault(tmp_forward_timer_default);
                 }
                 else
                 {
                   double tmp_backward_timer_default =
-                      Math.Round((rand.NextDouble() - 0.5) * 0 *
+                      Math.Round((1 + (rand.NextDouble() - 0.5) * 0) *
                                  original_path_length / original_backward_speed * (1 + ratio * 3));
                   PT.path_table[path_idx].SetBackwardTimerDefault(tmp_backward_timer_default);
                 }
@@ -203,14 +203,14 @@ namespace HeartSim.classes.NodeNS
                 if (path.Terminal == PathTerminal.Entry)
                 {
                   double tmp_forward_timer_default =
-                      Math.Round((rand.NextDouble() - 0.5) * 0 *
+                      Math.Round((1 + (rand.NextDouble() - 0.5) * 0) *
                                  original_path_length / original_forward_speed * (1 + ratio * ratio * 3));
                   PT.path_table[path_idx].SetForwardTimerDefault(tmp_forward_timer_default);
                 }
                 else
                 {
                   double tmp_backward_timer_default =
-                      Math.Round((rand.NextDouble() - 0.5) * 0 *
+                      Math.Round((1 + (rand.NextDouble() - 0.5) * 0) *
                                  original_path_length / original_backward_speed * (1 + ratio * ratio * 3));
                   PT.path_table[path_idx].SetBackwardTimerDefault(tmp_backward_timer_default);
                 }
@@ -219,7 +219,7 @@ namespace HeartSim.classes.NodeNS
 
             // reset TRRP
             _nodeParameters.TRRPCurrent = (int)Math.Round(
-                (rand.NextDouble() - 0.5) * 0 * _nodeParameters.TRRPDefault);
+                (1 + (rand.NextDouble() - 0.5) * 0) * _nodeParameters.TRRPDefault);
             // change state to ERP
             _nodeParameters.NodeStateIndex = NodeStateIndex.ERP;
             break;
@@ -236,7 +236,7 @@ namespace HeartSim.classes.NodeNS
               _nodeParameters.NodeStateIndex = NodeStateIndex.ERP;
               // reset Trest timer
               _nodeParameters.TrestCurrent = (int)Math.Round(
-                  (rand.NextDouble() - 0.5) * 0 * _nodeParameters.TrestDefault);
+                  (1 + (rand.NextDouble() - 0.5) * 0) * _nodeParameters.TrestDefault);
               // activate the node
               t_activation = true;
             }
@@ -251,7 +251,7 @@ namespace HeartSim.classes.NodeNS
               // change state to RRP
               _nodeParameters.NodeStateIndex = NodeStateIndex.RRP;
               // reset TERP timer
-              _nodeParameters.TERPCurrent = (int)Math.Round((rand.NextDouble() - 0.5) * 0 *
+              _nodeParameters.TERPCurrent = (int)Math.Round((1 + (rand.NextDouble() - 0.5) * 0) *
                                                         _nodeParameters.TERPDefault);
             }
             else // timer
@@ -265,7 +265,7 @@ namespace HeartSim.classes.NodeNS
               // change state to rest
               _nodeParameters.NodeStateIndex = NodeStateIndex.Rest;
               // reset TRRP timer
-              _nodeParameters.TRRPCurrent = (int)Math.Round((rand.NextDouble() - 0.5) * 0 *
+              _nodeParameters.TRRPCurrent = (int)Math.Round((1 + (rand.NextDouble() - 0.5) * 0) *
                                                         _nodeParameters.TRRPDefault);
             }
             else // timer

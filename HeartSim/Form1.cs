@@ -105,5 +105,10 @@ namespace HeartSim
     {
       _cancellationTokenSource.Cancel();
     }
+
+    private void Form1_Load(object sender, EventArgs e)
+    {
+
+    }
   }
 }

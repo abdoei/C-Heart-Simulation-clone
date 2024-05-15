@@ -42,13 +42,13 @@ namespace HeartSim.classes.HeartNS
       {
         Node tempNodeElem = tempNode.node_table[i];
         tempNodeElem.SetIndexofPathActivateTheNode(-1);
-        tempNodeElem.NodeAutomaton(tempPathNode);
+        tempNodeElem.NodeAutomaton(ref tempPathNode);
         tempAct.Add(tempNodeElem.GetParameters().Activation);
       }
 
       for (int i = 0; i < m_pathTable.path_table.Count; i++)
       {
-        (bool, bool) nodeActs = tempPath.path_table[i].PathAutomaton(nodeTable);
+        (bool, bool) nodeActs = tempPath.path_table[i].PathAutomaton(ref nodeTable);
         bool nodeAct1 = nodeActs.Item1;
         bool nodeAct2 = nodeActs.Item2;
         Path path = pathTable.path_table[i];

@@ -50,7 +50,7 @@ namespace HeartSim.classes.PathNS
       };
     }
 
-    public (bool, bool) PathAutomaton(NodeTable nt)
+    public (bool, bool) PathAutomaton(ref NodeTable nt)
     {
       bool tempNode1Activation = false;
       bool tempNode2Activation = false;
